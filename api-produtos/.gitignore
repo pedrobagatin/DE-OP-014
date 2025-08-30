@@ -1,0 +1,40 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# IDE
+.idea/
+*.iws
+*.iml
+.vscode/
+.DS_Store
+
+# Logs
+*.log
+logs/
+log/
+
+# Temp files
+*.tmp
+*~
+ehcache.xml
+**/hs_err_*.log
+
+# Spring
+application.properties
+application-*.properties
+
+# Package
+*.jar
+*.war
+*.ear
+
+# Runtime
+out/
+build/
