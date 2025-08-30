@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Redirecting...";
+}
+
+<div class="text-center mt-5">
+    <meta http-equiv="refresh" content="5;url=@ViewBag.ConfirmedUrl" />
+
+    <small class="d-block mt-2">
+        Redirecting in 5 seconds... <a href="@ViewBag.ConfirmedUrl">Click here to skip</a>
+    </small>
+    
+    <h3>Leave ShortURL?</h3>
+    <p class="lead">
+        You're leaving <strong>shorturl.example</strong> and going to:
+    </p>
+
+    <div class="alert alert-info d-inline-block mt-3">
+        <strong>@ViewBag.TargetDomain</strong>
+    </div>
+
+    <p class="mt-4">@ViewBag.FullUrl</p>
+
+    <div class="mt-4">
+        <a href="@ViewBag.ConfirmedUrl" class="btn btn-success btn-lg me-3">Visit Site</a>
+        <a href="/" class="btn btn-secondary btn-lg">Cancel</a>
+    </div>
+
+    <small class="text-muted d-block mt-4">
+        This site is not owned by ShortURL. Always be cautious when visiting external links.
+    </small>
+</div>

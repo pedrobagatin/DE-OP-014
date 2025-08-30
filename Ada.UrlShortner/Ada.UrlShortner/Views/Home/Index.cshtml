@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "_Layout";
+}
+
+<div class="text-center my-5">
+    <h1 class="display-4">Welcome to ShortURL</h1>
+    <p class="lead">The simplest way to shorten your long URLs and track clicks.</p>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Html.Raw(TempData["Success"])
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger d-flex justify-content-between align-items-center alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn btn-sm btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <div class="mt-4">
+        <form asp-controller="Url" asp-action="Shorten" method="post" class="d-flex justify-content-center">
+            <input type="text" name="OriginalUrl" class="form-control me-2" style="max-width: 300px;" placeholder="Long URL" required />
+
+            <input type="text" name="CustomShortCode" class="form-control me-2" style="max-width: 120px;" placeholder="Custom code (optional)" />
+
+            <button class="btn btn-success" type="submit">Shorten</button>
+        </form>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Fast</h5>
+                <p class="card-text">Get a short link in seconds.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Secure</h5>
+                <p class="card-text">Your links are protected and private.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Trackable</h5>
+                <p class="card-text">See how many people click your links.</p>
+            </div>
+        </div>
+    </div>
+</div>
