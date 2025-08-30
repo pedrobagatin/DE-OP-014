@@ -1,0 +1,50 @@
+# Build results
+/[Dd]ebug/
+/[Dd]ebugPublic/
+/[Rr]elease/
+/[Rr]eleases/
+x64/
+x86/
+build/
+artifacts/
+**/*.dll
+**/*.exe
+**/*.pdb
+
+# .NET Core
+bin/
+obj/
+
+# NuGet
+packages/
+*.nupkg
+NuGet.Config
+nuget.config
+
+# IDE
+.idea/
+*.swp
+*.swo
+.DS_Store
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Rider
+rider.settings
+
+# Environment
+.env
+.env.local
+
+# Docker
+Dockerfile.local
+docker-compose.override.yml
