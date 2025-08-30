@@ -1,0 +1,18 @@
+# Build artifacts
+/target/
+**/*.rs.bk
+
+# Cargo.lock (opcional em bibliotecas, mas mantenha em binários/exemplos)
+# Descomente se for uma biblioteca (crate)
+# Cargo.lock
+
+# Rust toolchain
+rust-toolchain
+rustfmt.toml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
