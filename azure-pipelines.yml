@@ -24,7 +24,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '8.0.x'  # ou 7.0.x / 6.0.x — depende da versão do .NET que você usa
+    version: '9.0.x'  # ou 7.0.x / 6.0.x — depende da versão do .NET que você usa
   displayName: 'Instalar .NET SDK'
 
 - task: DotNetCoreCLI@2
