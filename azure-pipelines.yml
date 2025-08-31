@@ -54,3 +54,4 @@ steps:
     azureSubscription: 'AzureAppService'
     appName: 'testess'
     resourceGroupName: 'teste-rg'
+  displayName: 'Publicar aplicação no app services'
