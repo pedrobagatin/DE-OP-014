@@ -48,10 +48,3 @@ steps:
     zipAfterPublish: true
   displayName: 'Publicar aplicação'
 
-
-- task: AzureAppServiceSettings@1
-  inputs:
-    azureSubscription: 'AzureAppService'
-    appName: 'testess'
-    resourceGroupName: 'teste-rg'
-  displayName: 'Publicar aplicação no app services'
