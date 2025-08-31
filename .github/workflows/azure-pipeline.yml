@@ -1,0 +1,46 @@
+name: Azure Static Web Apps CI/CD
+
+trigger:
+  - main  
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureSubscription: 'AzureAppService'   # Nome da Service Connection no DevOps
+  appName: 'meu-app-java'                # Nome do App Service
+  packagePath: '$(System.DefaultWorkingDirectory)/target/*.jar'  # Saída do Maven
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'package'
+      options: '-DskipTests'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.17'  # Altere conforme a versão do seu projeto
+      mavenVersionOption: 'Default'
+      publishJUnitResults: true
+    displayName: 'Build com Maven'
+  
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)/target'
+      Contents: '*.jar'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    displayName: 'Copiar .jar para staging'
+  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
+    displayName: 'Publicar artefato'
+  
+  - task: AzureWebApp@1
+    inputs:
+      azureSubscription: '$(azureSubscription)'
+      appName: '$(appName)'
+      appType: 'webAppLinux'  # ou 'webApp' se for Windows
+      package: '$(Build.ArtifactStagingDirectory)/*.jar'
+    displayName: 'Deploy para Azure App Service'
