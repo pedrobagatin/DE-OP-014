@@ -1,0 +1,26 @@
+# Diretório de build do Rust
+target
+
+# Configurações locais
+Cargo.lock
+*.rs.bk
+
+# Logs
+*.log
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# Sistema
+.DS_Store
+Thumbs.db
