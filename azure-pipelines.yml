@@ -4,7 +4,11 @@
 # https://aka.ms/yaml
 
 trigger:
-- api-produtos-cs
+  branches:
+    include:
+      - api-produtos-cs
+    exclude:
+      - main
 
 pool:
   vmImage: ubuntu-latest
@@ -16,6 +20,7 @@ variables:
   projectPath: '**/api-produtos.csproj'            # ou caminho direto do seu .csproj
 
 steps:
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
