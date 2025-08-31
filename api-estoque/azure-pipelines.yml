@@ -1,0 +1,43 @@
+trigger:
+- main
+
+variables:
+  dockerRegistryServiceConnection: '<NOME_DA_CONNECTION_ACR>'
+  imageRepository: 'estoque-api'
+  containerRegistry: '<NOME_DO_ACR>.azurecr.io'
+  dockerfilePath: 'Dockerfile'
+  tag: '$(Build.BuildId)'
+  appName: '<NOME_DO_WEBAPP_ESTOQUE>'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and Push Docker Image
+  jobs:
+  - job: Build
+    steps:
+    - task: Docker@2
+      displayName: Build and Push
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+- stage: Deploy
+  displayName: Deploy to Azure Web App
+  dependsOn: Build
+  jobs:
+  - job: Deploy
+    steps:
+    - task: AzureWebAppContainer@1
+      displayName: Deploy to Web App
+      inputs:
+        azureSubscription: '<NOME_DA_SERVICE_CONNECTION_AZURE>'
+        appName: $(appName)
+        containers: |
+          $(containerRegistry)/$(imageRepository):$(tag)
