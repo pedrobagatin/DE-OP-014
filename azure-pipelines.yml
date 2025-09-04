@@ -48,10 +48,3 @@ steps:
     zipAfterPublish: true
   displayName: 'Publicar aplicação'
 
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'AzureAppService'
-    appType: 'webApp'
-    appName: 'testess'
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
-  displayName: 'Deploy para Azure'
