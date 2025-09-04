@@ -33,7 +33,7 @@ steps:
   inputs: 
     command: 'publish'
     publishWebProjects: true
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    arguments: ' $(projectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
 
 - task: AzureAppServiceSettings@1
