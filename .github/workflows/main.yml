@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - 'urlshortner-test'
+      - 'urlshortner-cs'
 
 name: Build and deploy container image to Azure
 
