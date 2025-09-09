@@ -1,0 +1,56 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - api-produtos-cs
+    exclude:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+  azureSubscription: 'AzureAppService'  # nome da conexão com o Azure DevOps
+  appName: 'api-produtos'            # nome do seu App Service no Azure
+  projectPath: '**/api-produtos.csproj'            # ou caminho direto do seu .csproj
+
+steps:
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'  # ou 7.0.x / 6.0.x — depende da versão do .NET que você usa
+  displayName: 'Instalar .NET SDK'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '$(projectPath)'
+  displayName: 'Restaurar dependências'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '$(projectPath)'
+    arguments: '--configuration $(buildConfiguration)'
+  displayName: 'Build da aplicação'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+  displayName: 'Publicar aplicação'
+
+
+- task: AzureAppServiceSettings@1
+  inputs:
+    azureSubscription: 'AzureAppService'
+    appName: 'testess'
+    resourceGroupName: 'teste-rg'

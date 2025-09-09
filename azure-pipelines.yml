@@ -1,0 +1,43 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+ branches:
+   include:
+     - api-produtos-cs
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+  azureSubscription: 'AzureAppService'
+  appName: 'api-produtos'
+  projectPath: '**/api-proutos.csproj'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.0.x'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '$(projectPath)'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs: 
+    command: 'publish'
+    publishWebProjects: true
+    arguments: ' $(projectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+
+- task: AzureAppServiceSettings@1
+  inputs: 
+    azureSubscription: 'Azure subscription 1(dd086a2e-9481-4e93-bfdb-033991e03d69)'
+    appName: 'api-produtos'
+    resourceGroupName: 'teste-rg' 
